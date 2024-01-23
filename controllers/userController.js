@@ -135,6 +135,8 @@ exports.updateUserDetails = async(req,res)=>{
 
     }
 
+    console.log("username --------->", user.fullname);
+
     user.fullname = fullname;
     user.email = email;
 

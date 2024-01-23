@@ -2,9 +2,10 @@ const mongoose = require("mongoose");
 
 
 const restaurantSchema = new mongoose.Schema({
-    restaurantName:String,
-    restaurantAddress:String,
-    restaurantNeighborhood:String,
+    name:String,
+    address:String,
+    neighborhood:String,
+    cuisine:String,
     photograph:String
 });
 

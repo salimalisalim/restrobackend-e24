@@ -71,3 +71,47 @@ exports.getRestaurants = async(req,res)=>{
     }
 
 }
+
+exports.updateRestaurant = async(req,res)=>{
+
+
+    const restaurantID = req.params.id;
+
+    const {name, address, neighborhood, cuisine} = req.body;
+
+    console.log(req.body);
+
+
+    const selectedPic = req.file?.path ?? '';
+
+    try {
+
+        const restaurant = await Restaurant.findById(restaurantID);
+
+        if(!restaurant){
+            return res.status(404).json({success:false, message: 'Restaurant not found'});
+    
+        }
+        
+        restaurant.name = name;
+        restaurant.address = address;
+        restaurant.neighborhood = neighborhood;
+        restaurant.cuisine = cuisine;
+        restaurant.photograph = selectedPic;
+
+        restaurant.save();
+
+        console.log("after update------------->", restaurant);
+
+        res.status(200).json({
+            success:true, 
+            message: 'Restaurant updated successfully!'
+        });
+
+
+
+    } catch (error) {
+        res.status(500).json({success:false, message: error.message});
+    }
+
+}
